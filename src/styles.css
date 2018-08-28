@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+.injured{
+  /*Need important to overide boostrap odd table colouring*/
+  background-color: #f57373 !important;
+  cursor: pointer;
+}
+
+.noInjury{
+  cursor: pointer;
+}
+
+.difficulty-1 {
+  padding: .2rem .2rem;
+  background-color: #257d5a;
+  color: white;
+  text-align: center;
+}
+
+.difficulty-2 {
+  padding: .2rem .2rem;
+  background-color: #00ff86;
+  color: black;
+  text-align: center;
+}
+
+.difficulty-3 {
+  padding: .2rem .2rem;
+  background-color: #ebebe4;
+  color: black;
+  text-align: center;
+}
+
+.difficulty-4 {
+  padding: .2rem .2rem;
+  background-color: #ff005a;
+  color: white;
+  text-align: center;
+}
+
+.difficulty-5 {
+  padding: .2rem .2rem;
+  background-color: #861d46;
+  color: white;
+  text-align: center;
+}
+
+.img-small {
+  width: 70px;
+  height: 70px;
+}

@@ -1,3 +1,56 @@
-<p>
-  home works!
-</p>
+<div class="container">
+  <div class="jumbotron">
+    <h2>Welcome to FPL Transfer Suggester 2.0</h2>
+    <p class="lead">The all new fpl transfer suggester with more features. Click <a routerLink='/new' routerLinkActive='active'>here</a> to see what's changed!</p>
+  </div>
+
+  <div class="container" *ngIf='notLoggedIn'>
+    <p style="color:crimson;">Not logged in! Please log into the fantasy premier league & re open this extension...</p>
+  </div>
+
+  <div class="container" *ngIf='!notLoggedIn'>
+    <h2>Your Team</h2>
+    <div class="row">
+      <div class="col-sm-8">
+        <input type='text' (keyup.enter)='myEvent(gamesInput)' style='width:300px;' [(ngModel)]='gamesInput' placeholder='Change fix difficulty range...'>
+        <button class='btn btn-primary' type='submit' (click)='myEvent(gamesInput)'>Change</button>
+      </div>
+    </div>
+    <br />
+
+    <p>Test build</p>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Form</th>
+        <th>Fixture Diff</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <p *ngIf='!usersTeam'>Loading......</p>
+
+      <!--<tr *ngFor='let item of usersTeam' tooltip='{{item.news}}' [ngClass]="item.news ? 'injured': 'noInjury'" routerLink='/player/{{item.id}}' routerLinkActive='active'>-->
+        <!--<td><img class='img-small' src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{item.code}}.png'></td>-->
+        <!--<td>{{item.web_name}}</td>-->
+        <!--<td>{{item.form}}</td>-->
+        <!--<td>-->
+          <!--{{item.fdr}}-->
+          <!--<div class='row'>-->
+            <!--<div class='col-sm-1' *ngFor='let i of item.opponentsAndDiff'>-->
+              <!--<span class='{{i.class}}' tooltip='{{i.name}}'>{{i.diff}}</span>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
