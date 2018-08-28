@@ -18,7 +18,7 @@
     </div>
     <br />
 
-    <p>Test build</p>
+    <p>Test buildefudyqegyy</p>
 
     <table class="table table-striped">
       <thead>
@@ -33,19 +33,19 @@
       <tbody>
       <p *ngIf='!usersTeam'>Loading......</p>
 
-      <!--<tr *ngFor='let item of usersTeam' tooltip='{{item.news}}' [ngClass]="item.news ? 'injured': 'noInjury'" routerLink='/player/{{item.id}}' routerLinkActive='active'>-->
-        <!--<td><img class='img-small' src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{item.code}}.png'></td>-->
-        <!--<td>{{item.web_name}}</td>-->
-        <!--<td>{{item.form}}</td>-->
-        <!--<td>-->
-          <!--{{item.fdr}}-->
-          <!--<div class='row'>-->
-            <!--<div class='col-sm-1' *ngFor='let i of item.opponentsAndDiff'>-->
-              <!--<span class='{{i.class}}' tooltip='{{i.name}}'>{{i.diff}}</span>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</td>-->
-      <!--</tr>-->
+      <tr id="test" *ngFor='let item of usersTeam' tooltip='{{item.news}}' [ngClass]="item.news ? 'injured': 'noInjury'" routerLink='/player/{{item.id}}' routerLinkActive='active'>
+        <td><img class='img-small' src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{item.code}}.png'></td>
+        <td>{{item.web_name}}</td>
+        <td>{{item.form}}</td>
+        <td>
+          {{item.fdr}}
+          <div class='row'>
+            <div class='col-sm-1' *ngFor='let i of item.opponentsAndDiff'>
+              <span class='{{i.class}}' tooltip='{{i.name}}'>{{i.diff}}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
 
       </tbody>
     </table>

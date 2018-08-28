@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 
 // my imports
-import { PlayerService } from '../service/player.service';
-import { Player } from '../models/player';
-import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
+import {PlayerService} from '../service/player.service';
+import {Player} from '../models/player';
+import {SafeHtmlPipe} from '../pipes/safe-html.pipe';
 
 
 @Component({
@@ -17,11 +17,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // variables
   private req: any;
-  private usersTeam: [Player];
-  private notLoggedIn = false;
+  private usersTeam: Player[];
+  public notLoggedIn = false;
   private players: Player[];
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService) {
+  }
 
   ngOnInit() {
     /* initialise the data
@@ -31,11 +32,32 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   initialiseData() {
-      this.playerService.initialiseData().subscribe((data) => {
-        if (this.playerService.getDataInitialised()) {
-          console.log("We have the data okay!");
-        }
-      });
+    this.playerService.initialiseData().subscribe(() => {
+      if (this.playerService.getDataInitialised()) {
+        console.log('We have the data okay!');
+        this.getUsersTeam();
+      }
+    });
+  }
+
+  getUsersTeam() {
+    this.playerService.initialiseUsersTeam().subscribe((response) => {
+      if (response === 403) {
+        this.notLoggedIn = true;
+      } else if (response === 200) {
+        this.getUsersTeam();
+      } else {
+        console.log("we got your team");
+        console.log(response);
+        this.usersTeam = this.playerService.getUsersTeam();
+        console.log(this.usersTeam);
+      }
+    });
+  }
+
+  myEvent(id: number) {
+    this.playerService.calculateFixtureDifficulty(id);
+    this.getUsersTeam();
   }
 
   // initialiseData() {
