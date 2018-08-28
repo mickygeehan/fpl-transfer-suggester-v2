@@ -1,3 +1,106 @@
-<p>
-  player-replacement works!
-</p>
+
+<div class="container">
+  <h3>
+    Replacements for
+    <small class="text-muted">{{player.first_name}} {{player.second_name}}</small>
+  </h3>
+  <hr/>
+  <div class='row' style="height:200px;overflow:auto;">
+    <div class="col-sm-3">
+      <img src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{player.code}}.png' class="rounded float-left img-thumbnail" alt="Player image">
+    </div>
+    <div class="col-sm-9">
+      <table class="table">
+        <tbody>
+        <!-- All players -->
+        <tr>
+          <th>Form</th>
+          <td>{{player.form}}</td>
+        </tr>
+        <tr>
+          <th>Cost</th>
+          <td>£{{player.now_cost/10}}</td>
+        </tr>
+        <tr>
+          <th>FDR</th>
+          <td>
+            {{player.fdr}}
+            <div class='row'>
+              <div class='col-sm-1' *ngFor='let i of player.opponentsAndDiff'>
+                <span class='{{i.class}}' tooltip='{{i.name}}'>{{i.diff}}</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <!-- All except keepers -->
+        <tr *ngIf='player.element_type != 1'>
+          <th>Goals</th>
+          <td>{{player.goals_scored}}</td>
+        </tr>
+        <tr *ngIf='player.element_type != 1'>
+          <th>Assists</th>
+          <td>{{player.assists}}</td>
+        </tr>
+        <!-- Tables for keepers & defenders only -->
+        <tr *ngIf='player.element_type === 1'>
+          <th>Saves</th>
+          <td>{{player.saves}}</td>
+        </tr>
+        <tr *ngIf='player.element_type != 4'>
+          <th>Clean Sheets</th>
+          <td>{{player.clean_sheets}}</td>
+        </tr>
+
+
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+
+
+  <p *ngIf='replacementPlayers.length === 0'>There are no better replacements for this player!!</p>
+
+  <table *ngIf='replacementPlayers.length > 0' class="table table-striped">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Form</th>
+      <th>Fixture Diff</th>
+      <th *ngIf='playerPosition === 1'>Saves</th>
+      <th *ngIf='playerPosition != 1'>Goals</th>
+      <th *ngIf='playerPosition != 1'>Assists</th>
+      <th *ngIf='playerPosition != 4'>Clean Sheets</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <p *ngIf='!replacementPlayers'>Loading......</p>
+    <tr *ngFor='let replacement of replacementPlayers' tooltip='{{replacement.news}}' [ngClass]="replacement.news ? 'injured': 'noInjury'" routerLink='/player/{{replacement.id}}' routerLinkActive='active'>
+      <td><img class='img-small' src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{replacement.code}}.png'></td>
+      <td>{{replacement.web_name}}</td>
+      <td>{{replacement.form}}</td>
+      <td>
+        {{replacement.fdr}}
+        <div class='row'>
+          <div class='col-sm-1' *ngFor='let i of replacement.opponentsAndDiff'>
+            <span class='{{i.class}}' tooltip='{{i.name}}'>{{i.diff}}</span>
+          </div>
+        </div>
+      </td>
+
+      <!-- Optional tables -->
+      <td *ngIf='replacement.element_type === 1'>{{replacement.saves}}</td>
+      <td *ngIf='replacement.element_type != 1'>{{replacement.goals_scored}}</td>
+      <td *ngIf='replacement.element_type != 1'>{{replacement.assists}}</td>
+      <td *ngIf='replacement.element_type != 4'>{{replacement.clean_sheets}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+

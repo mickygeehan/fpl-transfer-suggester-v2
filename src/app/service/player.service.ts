@@ -98,6 +98,30 @@ export class PlayerService {
     return toReturn;
   }
 
+  getPlayer(id: number): Player {
+    for (const player of this.players) {
+      if (player.id === id) {
+        return player;
+      }
+    }
+  }
+
+  getReplacementPlayers(playerToReplace: Player): Player[] {
+    const toReturn: Player[] = [];
+    this.players.forEach(player => {
+      // check same position
+      if (player.element_type === playerToReplace.element_type) {
+        // check player has easier FDR
+        if (player.fdr < playerToReplace.fdr) {
+          // check players plays regularly
+          if (player.minutes >= this.minMinutesPlayed) {
+            toReturn.push(player);
+          }
+        }
+      }
+    });
+    return toReturn;
+  }
 
   // Also add names to team array for typeahead
   addFixturesToTeams() {

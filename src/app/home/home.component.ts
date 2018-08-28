@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   // This component will display all players in the users team
 
   // variables
-  private req: any;
   private usersTeam: Player[];
   public notLoggedIn = false;
   private players: Player[];
@@ -35,7 +34,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.playerService.initialiseData().subscribe(() => {
       if (this.playerService.getDataInitialised()) {
         console.log('We have the data okay!');
-        this.getUsersTeam();
+        this.playerService.initialiseFixtures().subscribe(() => {
+          this.getUsersTeam();
+        });
       }
     });
   }
@@ -101,7 +102,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   // }
 
   ngOnDestroy() {
-    this.req.unsubscribe();
   }
 
 }
