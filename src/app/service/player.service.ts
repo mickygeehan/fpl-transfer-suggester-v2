@@ -239,6 +239,30 @@ export class PlayerService {
   getUsersTeam(): Player[] {
     return this.usersTeam;
   }
+
+  getTotalMinutesPlayed(): number {
+    return this.totalMinutesPlayed;
+  }
+
+  getTeamNames(): string[] {
+    return this.teamNames;
+}
+
+  getTeamCode(input: string): number {
+    for (const team of this.teams) {
+      if (team.name.toLowerCase().indexOf(input.toLowerCase()) !== -1) {
+        return team.code;
+      }
+    }
+  }
+
+  getTeamId(input: string): number {
+    for (const team of this.teams) {
+      if (team.name.toLowerCase().indexOf(input.toLowerCase()) !== -1) {
+        return team.id;
+      }
+    }
+  }
 }
 
 

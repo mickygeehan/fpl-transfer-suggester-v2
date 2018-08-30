@@ -1,3 +1,36 @@
-<p>
-  player-list works!
-</p>
+<div class="container">
+
+  <br />
+  <h2>Player List</h2>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Click on any player below to see detailed stats</label>
+    <input type="text" [typeahead]="teamNames" [(ngModel)]='filterName' class="form-control"  aria-describedby="emailHelp" placeholder="Enter players name or team name">
+  </div>
+
+  <table *ngIf='players.length > 0' class="table table-striped">
+    <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>% of games played</th>
+      <th>Form</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="test" *ngFor="let item of players | filter: filterName" tooltip='{{item.news}}' [ngClass]="item.news ? 'injured': 'noInjury'" routerLink='/playerdetail/{{item.id}}' routerLinkActive='active'>
+      <td><img style="width:50px;height:50px;" src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{item.code}}.png'>
+      <td>{{item.web_name}}</td>
+      <td>{{(item.minutes/totalMins)*100 | number : '1.1-1'}}%</td>
+      <td>{{item.form}}</td>
+    </tr>
+    <!--<tr *ngFor='let item of players | filter : filterName' tooltip='{{item.news}}' [ngClass]="item.news ? 'injured': 'noInjury'" routerLink='/playerdetail/{{item.id}}' routerLinkActive='active'>-->
+      <!--<td><img style="width:50px;height:50px;" src='http://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p{{item.code}}.png'></td>-->
+      <!--<td>{{item.web_name}}</td>-->
+      <!--<td>{{(item.minutes/totalMins)*100 | number : '1.1-1'}}%</td>-->
+      <!--<td>{{item.form}}</td>-->
+    <!--</tr>-->
+    </tbody>
+  </table>
+
+</div>
