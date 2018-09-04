@@ -31,10 +31,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   initialiseData() {
-    this.playerService.initialiseData().subscribe(() => {
+    this.playerService.getBulkData().subscribe(() => {
       if (this.playerService.getDataInitialised()) {
         console.log('We have the data okay!');
-        this.playerService.initialiseFixtures().subscribe(() => {
+        this.playerService.getFixtures().subscribe(() => {
           this.getUsersTeam();
         });
       }
@@ -42,22 +42,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getUsersTeam() {
-    this.playerService.initialiseUsersTeam().subscribe((response) => {
+    this.playerService.getUsersTeamFromUrl().subscribe((response) => {
       if (response === 403) {
         this.notLoggedIn = true;
       } else if (response === 200) {
         this.getUsersTeam();
       } else {
-        console.log("we got your team");
-        console.log(response);
         this.usersTeam = this.playerService.getUsersTeam();
-        console.log(this.usersTeam);
       }
     });
   }
 
   myEvent(id: number) {
-    this.playerService.calculateFixtureDifficulty(id);
+    this.playerService.getTeamStore().calculateFixtureDifficulty(id);
     this.getUsersTeam();
   }
 

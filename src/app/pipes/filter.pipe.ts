@@ -12,7 +12,7 @@ export class FilterPipe implements PipeTransform {
     if (filterName) {
       // tslint:disable-next-line:label-position
       // tslint:disable-next-line:prefer-const
-      let teamCode: number = this.playerService.getTeamCode(filterName);
+      let teamCode: number = this.playerService.getTeamStore().getTeamCode(filterName);
       if (teamCode !== -1) {
         const toReturn = [];
         for (const pick of value) {

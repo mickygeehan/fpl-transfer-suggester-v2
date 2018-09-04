@@ -29,7 +29,7 @@ export class GameFilterPipe implements PipeTransform {
   }
 
   getTeamID(input: string): number {
-    return this.playerService.getTeamId(input);
+    return this.playerService.getTeamStore().getTeamId(input);
   }
 
 

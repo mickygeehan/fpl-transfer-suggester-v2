@@ -19,7 +19,7 @@ export class PlayerListComponent implements OnInit {
 
   ngOnInit() {
     this.players = this.playerService.getPlayers();
-    this.teamNames = this.playerService.getTeamNames();
+    this.teamNames = this.playerService.getTeamStore().getTeamNames();
     this.totalMins = this.playerService.getTotalMinutesPlayed();
     console.log(this.players);
   }
